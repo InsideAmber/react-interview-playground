@@ -1,31 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect} from "react";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 
-// implement 
-// Grouped dots (5 visible at once) showing the active slide
-// A progress container that shows where the user is in the list (like “4 / 20”)
-
-const images = [
-  {
-    id: 1,
-    url: "https://picsum.photos/id/1015/800/400",
-    title: "Mountain View"
-  },
-  {
-    id: 2,
-    url: "https://picsum.photos/id/1016/800/400",
-    title: "River Side"
-  },
-  {
-    id: 3,
-    url: "https://picsum.photos/id/1018/800/400",
-    title: "Forest Path"
-  },
-  {
-    id: 4,
-    url: "https://picsum.photos/id/1020/800/400",
-    title: "City Lights"
-  }
-];
+// Example with 20 images
+const images = Array.from({ length: 20 }, (_, i) => ({
+  id: i + 1,
+  url: `https://picsum.photos/id/${1010 + i}/800/400`,
+  title: `Image ${i + 1}`
+}));
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,10 +14,10 @@ export default function Carousel() {
   // Auto-play every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % images.length);
+      goToNext();
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentIndex]);
 
   const goToPrevious = () => {
     setCurrentIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
@@ -50,6 +31,20 @@ export default function Carousel() {
     setCurrentIndex(index);
   };
 
+  // Group dots — show 5 dots around the current index
+  const getVisibleDots = () => {
+    const maxVisible = 5;
+    const total = images.length;
+    let start = Math.max(currentIndex - 2, 0);
+    let end = start + maxVisible;
+
+    if (end > total) {
+      end = total;
+      start = Math.max(end - maxVisible, 0);
+    }
+    return images.slice(start, end);
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.carousel}>
@@ -58,22 +53,42 @@ export default function Carousel() {
           alt={images[currentIndex].title}
           style={styles.image}
         />
+
+        {/* Navigation Buttons */}
         <div style={styles.buttons}>
-          <button onClick={goToPrevious} style={styles.navButton}>‹</button>
-          <button onClick={goToNext} style={styles.navButton}>›</button>
+          <button onClick={goToPrevious} style={styles.navButton}>
+            <MdArrowBackIos size={24} />
+          </button>
+          <button onClick={goToNext} style={styles.navButton}>
+            <MdArrowForwardIos size={24} />
+          </button>
         </div>
+
+        {/* Progress Container */}
+        <div style={styles.progressContainer}>
+          {currentIndex + 1} / {images.length}
+        </div>
+
+        {/* Grouped Dots */}
         <div style={styles.dots}>
-          {images.map((_, index) => (
-            <span
-              key={index}
-              style={{
-                ...styles.dot,
-                backgroundColor: index === currentIndex ? "#333" : "#bbb"
-              }}
-              onClick={() => goToIndex(index)}
-            />
-          ))}
+          {getVisibleDots().map((image) => {
+            // Map back to the actual index
+            const actualIndex = images.findIndex(img => img.id === image.id);
+            console.log(actualIndex);
+            return (
+              <span
+                key={image.id}
+                style={{
+                  ...styles.dot,
+                  backgroundColor: actualIndex === currentIndex ? "#333" : "#bbb"
+                }}
+                onClick={() => goToIndex(actualIndex)}
+              />
+            );
+          })}
         </div>
+
+        {/* Title Overlay */}
         <div style={styles.title}>{images[currentIndex].title}</div>
       </div>
     </div>
@@ -114,7 +129,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     background: "rgba(0,0,0,0.5)",
     border: "none",
     color: "#fff",
-    fontSize: "2rem",
+    fontSize: "1.5rem",
     cursor: "pointer",
     borderRadius: "50%",
     width: "40px",
@@ -122,6 +137,16 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
+  },
+  progressContainer: {
+    position: "absolute",
+    top: "10px",
+    right: "20px",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    color: "#fff",
+    padding: "5px 10px",
+    borderRadius: "20px",
+    fontSize: "0.9rem"
   },
   dots: {
     position: "absolute",
@@ -133,7 +158,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   dot: {
     height: "12px",
     width: "12px",
-    margin: "0 5px",
+    margin: "0 4px",
     borderRadius: "50%",
     display: "inline-block",
     cursor: "pointer",
