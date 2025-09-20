@@ -1,6 +1,7 @@
 // import VirtualizedList from "./components/VirtualizedList"
 // import Carousel from "./components/Carousel"
-import CheckboxSelect from "./components/CheckboxSelect"
+// import CheckboxSelect from "./components/CheckboxSelect"
+import DependentDropdown from "./components/DependentDropdown"
 
 const App = () => {
   return (
@@ -8,7 +9,8 @@ const App = () => {
       <h1 className="text-xl font-bold mb-4">Multi select checkbox</h1>
       {/* <VirtualizedList /> */}
       {/* <Carousel /> */}
-      <CheckboxSelect />
+      {/* <CheckboxSelect /> */}
+      <DependentDropdown />
     </div>
   )
 }
