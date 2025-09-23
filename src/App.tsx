@@ -2,7 +2,8 @@
 // import Carousel from "./components/Carousel"
 // import CheckboxSelect from "./components/CheckboxSelect"
 // import DependentDropdown from "./components/DependentDropdown"
-import FilterDropdown from "./components/FilterDropdown"
+// import FilterDropdown from "./components/FilterDropdown"
+import Autocomplete from "./components/AutoComplete"
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
       {/* <Carousel /> */}
       {/* <CheckboxSelect /> */}
       {/* <DependentDropdown /> */}
-      <FilterDropdown />
+      {/* <FilterDropdown /> */}
+      <Autocomplete />
     </div>
   )
 }
