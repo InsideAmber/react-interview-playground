@@ -1,5 +1,6 @@
 // src/components/Autocomplete.tsx
 import React, { useState } from "react";
+import { useDebounce } from "../hooks/useDebounce";
 
 const staticOptions = [
   "Apple",
@@ -18,20 +19,24 @@ export default function Autocomplete() {
   const [isOpen, setIsOpen] = useState(false); // UI demo: dropdown always open
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredOptions, setFilteredOptions] = useState(staticOptions);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000) // For simplicity, not using debounce here
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     // In a real app, you might filter options based on searchTerm here
-    if (e.target.value) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
     const updatedSearchValue = staticOptions.filter((opt) =>
       opt.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFilteredOptions(updatedSearchValue);
+
+     if (e.target.value && updatedSearchValue.length > 0) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
   };
+
+  console.log("debouncedSearchTerm",debouncedSearchTerm)
 
   return (
     <div className="relative w-72">
