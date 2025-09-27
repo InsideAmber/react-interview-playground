@@ -3,7 +3,8 @@
 // import CheckboxSelect from "./components/CheckboxSelect"
 // import DependentDropdown from "./components/DependentDropdown"
 // import FilterDropdown from "./components/FilterDropdown"
-import Autocomplete from "./components/AutoComplete"
+// import Autocomplete from "./components/AutoComplete"
+import TransferList from "./components/TransferList"
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
       {/* <CheckboxSelect /> */}
       {/* <DependentDropdown /> */}
       {/* <FilterDropdown /> */}
-      <Autocomplete />
+      {/* <Autocomplete /> */}
+      <TransferList/>
     </div>
   )
 }
