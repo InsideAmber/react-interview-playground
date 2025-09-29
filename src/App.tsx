@@ -4,7 +4,8 @@
 // import DependentDropdown from "./components/DependentDropdown"
 // import FilterDropdown from "./components/FilterDropdown"
 // import Autocomplete from "./components/AutoComplete"
-import TransferList from "./components/TransferList"
+// import TransferList from "./components/TransferList"
+import StarRating from "./components/StarRating"
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
       {/* <DependentDropdown /> */}
       {/* <FilterDropdown /> */}
       {/* <Autocomplete /> */}
-      <TransferList/>
+      {/* <TransferList/> */}
+      <StarRating/>
     </div>
   )
 }
