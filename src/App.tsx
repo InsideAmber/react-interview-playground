@@ -6,7 +6,8 @@
 // import Autocomplete from "./components/AutoComplete"
 // import TransferList from "./components/TransferList"
 // import StarRating from "./components/StarRating"
-import TrafficLight from "./components/TrafficLight"
+// import TrafficLight from "./components/TrafficLight"
+import UndoRedoList from "./components/UndoRedoList"
 
 const App = () => {
   return (
@@ -19,7 +20,8 @@ const App = () => {
       {/* <Autocomplete /> */}
       {/* <TransferList/> */}
       {/* <StarRating/> */}
-      <TrafficLight/>
+      {/* <TrafficLight/> */}
+      <UndoRedoList/>
     </div>
   )
 }
