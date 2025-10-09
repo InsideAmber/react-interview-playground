@@ -5,7 +5,8 @@
 // import FilterDropdown from "./components/FilterDropdown"
 // import Autocomplete from "./components/AutoComplete"
 // import TransferList from "./components/TransferList"
-import StarRating from "./components/StarRating"
+// import StarRating from "./components/StarRating"
+import TrafficLight from "./components/TrafficLight"
 
 const App = () => {
   return (
@@ -17,7 +18,8 @@ const App = () => {
       {/* <FilterDropdown /> */}
       {/* <Autocomplete /> */}
       {/* <TransferList/> */}
-      <StarRating/>
+      {/* <StarRating/> */}
+      <TrafficLight/>
     </div>
   )
 }
